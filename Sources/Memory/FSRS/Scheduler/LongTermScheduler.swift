@@ -1,9 +1,3 @@
-//
-//  LongTermScheduler.swift
-//
-//  Created by nkq on 10/14/24.
-//
-
 import Foundation
 
 class LongTermScheduler: AbstractScheduler {

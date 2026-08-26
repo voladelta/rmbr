@@ -1,9 +1,3 @@
-//
-//  AbstractSch.swift
-//
-//  Created by nkq on 10/13/24.
-//
-
 import Foundation
 
 class AbstractScheduler: IScheduler {
@@ -62,22 +56,21 @@ class AbstractScheduler: IScheduler {
     }
 
     func newState(grade: Rating) -> RecordLogItem {
-        print("subclass must override")
-        return .init(card: Card(), log: ReviewLog(rating: .manual, state: .new, due: Date(), review: Date()))
+        preconditionFailure("Subclasses must override newState(grade:)")
     }
+
     func learningState(grade: Rating) -> RecordLogItem {
-        print("subclass must override")
-        return .init(card: Card(), log: ReviewLog(rating: .manual, state: .new, due: Date(), review: Date()))
+        preconditionFailure("Subclasses must override learningState(grade:)")
     }
+
     func reviewState(grade: Rating) -> RecordLogItem {
-        print("subclass must override")
-        return .init(card: Card(), log: ReviewLog(rating: .manual, state: .new, due: Date(), review: Date()))
+        preconditionFailure("Subclasses must override reviewState(grade:)")
     }
     
     func buildLog(rating: Rating) -> ReviewLog {
         .init(rating: rating,
               state: current.state,
-              due: last.lastReview == nil ? last.due : last.lastReview ?? Date(),
+              due: last.lastReview ?? last.due,
               stability: current.stability,
               difficulty: current.difficulty,
               elapsedDays: current.elapsedDays,

@@ -1,9 +1,3 @@
-//
-//  FSRSDefaults.swift
-//
-//  Created by nkq on 10/13/24.
-//
-
 import Foundation
 
 public class FSRSDefaults {
@@ -42,36 +36,6 @@ public class FSRSDefaults {
     }
 
     
-    /**
-     * Create an empty card
-     * @param now Current time
-     * @param afterHandler Convert the result to another type. (Optional)
-     * @example
-     * ```
-     * const card: Card = createEmptyCard(new Date());
-     * ```
-     * @example
-     * ```
-     * interface CardUnChecked
-     *   extends Omit<Card, "due" | "last_review" | "state"> {
-     *   cid: string;
-     *   due: Date | number;
-     *   last_review: Date | null | number;
-     *   state: StateType;
-     * }
-     *
-     * function cardAfterHandler(card: Card) {
-     *      return {
-     *       ...card,
-     *       cid: "test001",
-     *       state: State[card.state],
-     *       last_review: card.last_review ?? null,
-     *     } as CardUnChecked;
-     * }
-     *
-     * const card: CardUnChecked = createEmptyCard(new Date(), cardAfterHandler);
-     * ```
-     */
     func createEmptyCard(now: Date = Date(), afterHandler: ((Card) -> Card)? = nil) -> Card {
         let card = Card(due: now)
         return afterHandler?(card) ?? card

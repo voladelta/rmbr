@@ -1,9 +1,3 @@
-//
-//  FSRSAlgorithm.swift
-//
-//  Created by nkq on 10/14/24.
-//
-
 import Foundation
 /**
  * @see https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm#fsrs-45
@@ -114,8 +108,8 @@ public class FSRSAlgorithm {
      **/
     func applyFuzz(ivl: Double, elapsedDays: Double) -> Int {
         guard parameters.enableFuzz && ivl >= 2.5 else { return Int(round(ivl)) }
-        let genetaor = alea(seed: seed)
-        let fuzzFactor = genetaor.next()
+        let generator = FSRSAlea(seed: seed)
+        let fuzzFactor = generator.next()
         let ivls = FSRSHelper.getFuzzRange(
             interval: ivl,
             elapsedDays: elapsedDays,

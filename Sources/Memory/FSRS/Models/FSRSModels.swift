@@ -1,9 +1,3 @@
-//
-//  FSRSModels.swift
-//
-//  Created by nkq on 10/13/24.
-//
-
 import Foundation
 
 public enum CardState: Int, Codable {

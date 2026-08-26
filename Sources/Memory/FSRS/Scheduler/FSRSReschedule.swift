@@ -1,33 +1,12 @@
-//
-//  FSRSReschedule.swift
-//
-//  Created by nkq on 10/15/24.
-//
-
 import Foundation
 
-/**
- * The `Reschedule` class provides methods to handle the rescheduling of cards based on their review history.
- * determine the next review dates and update the card's state accordingly.
- */
 class FSRSReschedule {
     private var fsrs: FSRS
     
-    /**
-     * Creates an instance of the `Reschedule` class.
-     * @param fsrs - An instance of the FSRS class used for scheduling.
-     */
     init(fsrs: FSRS) {
         self.fsrs = fsrs
     }
     
-    /**
-     * Replays a review for a card and determines the next review date based on the given rating.
-     * @param card - The card being reviewed.
-     * @param reviewed - The date the card was reviewed.
-     * @param rating - The grade given to the card during the review.
-     * @returns A `RecordLogItem` containing the updated card and review log.
-     */
     func replay(
         card: Card,
         reviewDate: Date,
@@ -36,18 +15,6 @@ class FSRSReschedule {
         try fsrs.next(card: card, now: reviewDate, grade: rating)
     }
     
-    /**
-     * Processes a manual review for a card, allowing for custom state, stability, difficulty, and due date.
-     * @param card - The card being reviewed.
-     * @param state - The state of the card after the review.
-     * @param reviewed - The date the card was reviewed.
-     * @param elapsed_days - The number of days since the last review.
-     * @param stability - (Optional) The stability of the card.
-     * @param difficulty - (Optional) The difficulty of the card.
-     * @param due - (Optional) The due date for the next review.
-     * @returns A `RecordLogItem` containing the updated card and review log.
-     * @throws Will throw an error if the state or due date is not provided when required.
-     */
     func handleManualRating(
         card: Card,
         state: CardState,
@@ -108,13 +75,6 @@ class FSRSReschedule {
     }
 
     
-    /**
-     * Reschedules a card based on its review history.
-     *
-     * @param current_card - The card to be rescheduled.
-     * @param reviews - An array of review history objects.
-     * @returns An array of record log items representing the rescheduling process.
-     */
     func reschedule(
         currentCard: Card,
         reviews: [ReviewLog]

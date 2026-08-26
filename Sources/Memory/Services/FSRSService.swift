@@ -22,19 +22,19 @@ struct FSRSService {
             lastReview: card.lastReviewedAt
         )
         let scheduler = FSRS(parameters: FSRSParameters())
-        let item = try? scheduler.next(
+        // App ratings exclude `.manual`, the only grade rejected by `next`.
+        let next = try! scheduler.next(
             card: fsrsCard,
             now: reviewedAt,
             grade: fsrsRating(from: rating)
-        )
-        let next = item?.card
+        ).card
 
         return ReviewSchedule(
-            stability: next?.stability ?? card.stability ?? 0,
-            difficulty: next?.difficulty ?? card.difficulty ?? 0,
-            scheduledDays: Int(next?.scheduledDays ?? Double(card.scheduledDays)),
-            dueAt: next?.due ?? card.dueAt ?? reviewedAt,
-            state: appCardState(from: next?.state ?? fsrsCardState(from: card.stateRaw))
+            stability: next.stability,
+            difficulty: next.difficulty,
+            scheduledDays: Int(next.scheduledDays),
+            dueAt: next.due,
+            state: appCardState(from: next.state)
         )
     }
 
