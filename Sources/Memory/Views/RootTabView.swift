@@ -13,33 +13,48 @@ struct RootTabView: View {
     ]
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 16) {
-                if selectedSection == .notes {
-                    noteSlots
-                } else {
-                    flashcardTabs
-                }
+        Group {
+            switch selectedSection {
+            case .notes:
+                NotesView(selectedSlot: $selectedSlot)
+            case .flashcards:
+                FlashcardsView(mode: $flashcardMode)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .toolbar { navigationToolbar }
+    }
 
-                Spacer(minLength: 16)
+    @ToolbarContentBuilder
+    private var navigationToolbar: some ToolbarContent {
+        if #available(macOS 26, *) {
+            ToolbarItem(placement: .principal) {
+                sectionControls
+            }
+            .sharedBackgroundVisibility(.hidden)
 
+            ToolbarItem(placement: .primaryAction) {
                 sectionTabs
             }
-            .padding(.horizontal, 16)
-            .frame(height: 48)
-            .background(Color(nsColor: .windowBackgroundColor))
-
-            Divider()
-
-            Group {
-                switch selectedSection {
-                case .notes:
-                    NotesView(selectedSlot: $selectedSlot)
-                case .flashcards:
-                    FlashcardsView(mode: $flashcardMode)
-                }
+            .sharedBackgroundVisibility(.hidden)
+        } else {
+            ToolbarItem(placement: .principal) {
+                sectionControls
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            ToolbarItem(placement: .primaryAction) {
+                sectionTabs
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var sectionControls: some View {
+        switch selectedSection {
+        case .notes:
+            noteSlots
+        case .flashcards:
+            flashcardTabs
         }
     }
 

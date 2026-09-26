@@ -10,6 +10,7 @@ struct MemoryApp: App {
         WindowGroup {
             RootTabView()
         }
+        .windowToolbarStyle(.unifiedCompact)
         .modelContainer(for: [
             MemoryNote.self,
             MemoryCard.self,
