@@ -33,7 +33,9 @@ struct RootTabView: View {
             }
             .sharedBackgroundVisibility(.hidden)
 
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarSpacer(.flexible)
+
+            ToolbarItem(placement: .automatic) {
                 sectionTabs
             }
             .sharedBackgroundVisibility(.hidden)
@@ -42,7 +44,11 @@ struct RootTabView: View {
                 sectionControls
             }
 
-            ToolbarItem(placement: .primaryAction) {
+            ToolbarItem(placement: .automatic) {
+                Spacer()
+            }
+
+            ToolbarItem(placement: .automatic) {
                 sectionTabs
             }
         }
