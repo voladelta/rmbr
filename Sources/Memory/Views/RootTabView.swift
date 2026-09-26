@@ -77,7 +77,7 @@ struct RootTabView: View {
                         .overlay {
                             Circle().stroke(
                                 color,
-                                lineWidth: selectedSlot == slot ? 2.5 : 4.5
+                                lineWidth: selectedSlot == slot ? 2.5 : 3.5
                             )
                         }
                         .frame(width: 18, height: 18)
