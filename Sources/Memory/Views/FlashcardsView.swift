@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct FlashcardsView: View {
-    @State private var mode = FlashcardMode.review
+    @Binding var mode: FlashcardMode
 
     var body: some View {
         Group {
@@ -15,18 +15,6 @@ struct FlashcardsView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Picker("Flashcard mode", selection: $mode) {
-                    ForEach(FlashcardMode.allCases) { mode in
-                        Text(mode.title).tag(mode)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .labelsHidden()
-                .frame(width: 300)
-            }
-        }
     }
 }
 
